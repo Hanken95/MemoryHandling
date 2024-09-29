@@ -244,6 +244,55 @@ namespace MemoryHandling
                 * Create a switch with cases to push or pop items
                 * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+            //Svar: 1. För då kommer den som lägger sig först i kön få komma fram sist.
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Enter r to use the ReverseTextmethod");
+                Console.WriteLine("Enter 0 to go back to the main menu");
+
+                char input = Console.ReadKey(true).KeyChar;
+                Console.Clear();
+                switch (input)
+                {
+                    case 'r':
+                        ReverseText();
+                        break;
+                    case '0':
+                        return;
+                    default:
+                        Console.WriteLine("wrong input");
+                        Console.ReadKey(true);
+                        break;
+
+                }
+            }
+
+        }
+
+        private static void ReverseText()
+        {
+            Console.Clear();
+            Console.Write("Enter text: ");
+            var text = Console.ReadLine();
+            string reversedText = "";
+            Stack<char> stack = new Stack<char>();
+            foreach (var letter in text)
+            {
+                stack.Push(letter);
+            }
+
+            int stackCount = stack.Count;
+            for (int i = 0; i < stackCount; i++)
+            {
+                reversedText += stack.Pop();
+            }
+            Console.Clear();
+            Console.WriteLine("The reversed word is:");
+            Console.WriteLine(reversedText);
+            Console.WriteLine("\nPress any key to continue.");
+            Console.ReadKey(true);
         }
 
         static void CheckParanthesis()
