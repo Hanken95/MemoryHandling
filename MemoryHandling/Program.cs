@@ -295,7 +295,7 @@ namespace MemoryHandling
             Console.ReadKey(true);
         }
 
-        static void CheckParanthesis()
+        static void CheckParanthesis(string stringToCheck = "")
         {
             /*
                 * Use this method to check if the paranthesis in a string is Correct or incorrect.
@@ -303,7 +303,58 @@ namespace MemoryHandling
                 * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
                 */
 
+            Console.Clear();
+            if (stringToCheck == "")
+            {
+                Console.WriteLine("Input string");
+                stringToCheck = Console.ReadLine();
+                Console.Clear();
+            }
+            var stack = new Stack<char>();
+
+            foreach (var character in stringToCheck)
+            {
+                if (character == '(' || character == '{' || character == '[')
+                {
+                    stack.Push(character);
+                }
+                else if (character == ')')
+                {
+                    if (stack.Count < 1 || stack.Pop() != '(')
+                    {
+                        StringIsIncorrectMessage();
+                        return;
+                    }
+                }
+                else if (character == '}')
+                {
+                    if (stack.Count < 1 || stack.Pop() != '{')
+                    {
+                        StringIsIncorrectMessage();
+                        return;
+                    }
+                }
+                else if (character == ']')
+                {
+                    if (stack.Count < 1 || stack.Pop() != '[')
+                    {
+                        StringIsIncorrectMessage();
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine("String is correct");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
+            Console.Clear();
         }
 
+        private static void StringIsIncorrectMessage()
+        {
+            Console.WriteLine("String is incorrect");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
+            Console.Clear();
+        }
     }
 }
